@@ -1,0 +1,69 @@
+<h4>New Purchase</h4>
+<div class="row">
+    <div class="col-4">
+        <label for="supplier" class="form-label">Select Supplier</label>
+        <kendo-formfield>
+            <kendo-dropdownlist [(ngModel)]="selectedSuplier" [data]="supliers" textField="name" name="supplier" valueField="id" 
+                                [required]="true" (valueChange)="setSuplier($event)" placeholder="Search Suppliers...">
+            </kendo-dropdownlist>
+            <kendo-formhint *ngIf="formRef.controls.supplier?.errors?.required">Supplier is required</kendo-formhint>
+        </kendo-formfield>
+    </div>
+</div>
+<br>
+<form #formRef="ngForm">
+
+
+    <div class="row">
+        <div class="col">
+            <label for="product" class="form-label">Select Product</label>
+            <kendo-formfield>
+                <kendo-dropdownlist [(ngModel)]="selectedProduct" [data]="products" name="product" textField="name" valueField="id" 
+                                    [required]="true" (selectionChange)="setProduct($event)" placeholder="Search products...">
+                </kendo-dropdownlist>
+                <kendo-formhint *ngIf="formRef.controls.product?.errors?.required">Product is required</kendo-formhint>
+            </kendo-formfield>
+            <span style="float: right;">Price: {{itemPrice}}</span>
+        </div>
+        <div class="col">
+            <label for="quantity" class="form-label">Select Quantity</label>
+            <kendo-formfield>
+                <kendo-numerictextbox [min]="1" [max]="5" [(ngModel)]="quantity" name="quantity" [required]="true" 
+                                      (valueChange)="updatePrice()" placeholder="0">
+                </kendo-numerictextbox>
+                <kendo-formhint *ngIf="formRef.controls.quantity?.errors?.required">Quantity is required</kendo-formhint>
+            </kendo-formfield>
+            <span style="float: right;">Total Amount: {{totalPrice}}</span>
+        </div>
+        <div class="col">
+            <button kendoButton (click)="AddToForm()" [primary]="true" [disabled]="formRef?.invalid || false">Add</button>
+        </div>
+    </div>
+</form>
+
+<br><br>
+
+<kendo-grid [kendoGridBinding]="formData" [height]="410">
+    <kendo-grid-column field="product" title="Product"></kendo-grid-column>
+    <kendo-grid-column field="quantity" title="Quantity"></kendo-grid-column>
+    <kendo-grid-column field="price" title="Price"></kendo-grid-column>
+    <kendo-grid-column field="totalPrice" title="Total Amount"></kendo-grid-column>
+
+    <kendo-grid-column title="Actions" [width]="100" >
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <button class="k-button k-danger" (click)="delete(dataItem)">Delete</button>
+        </ng-template>
+      </kendo-grid-column>
+
+</kendo-grid>
+<div class="row">
+    <div class="col">
+        <span style="float: right;">Grand Total: {{grandTotal}}</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary" [disabled]="!selectedSuplier || false || formData.length === 0" (click)="sendPurchase()">Purchase</button>
+        <button class="btn btn-danger" (click)="cancelPurchase()" style="margin-left: 30px;">Cancel</button>
+    </div>
+</div>

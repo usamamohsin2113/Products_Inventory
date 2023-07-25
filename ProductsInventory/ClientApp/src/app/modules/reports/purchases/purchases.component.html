@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row col-md-12">
+    <h4>Purchases Report</h4>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <label for="fromDate" class="form-label">From Date</label>
+      <kendo-datepicker [(ngModel)]="fromDate"></kendo-datepicker>
+    </div>
+    <div class="col-md-2">
+      <label for="toDate" class="form-label">To Date</label>
+      <kendo-datepicker [(ngModel)]="toDate"></kendo-datepicker>
+    </div>
+    <div class="col-md-2">
+      <label for="type" class="form-label">Type</label>
+      <kendo-dropdownlist [(ngModel)]="selectedType" [data]="types" name="type" 
+                          [required]="true">
+      </kendo-dropdownlist>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-primary mt-4" (click)="getChart()">Create Chart</button>
+    </div>
+  </div>
+
+  <div class="row col-md-12 mt-4">
+    <kendo-chart style="height:250px">
+      <kendo-chart-series>
+        <kendo-chart-series-item type="column"
+                                 [data]="chartData"
+                                 field="totalAmount"
+                                 categoryField="orderDate">
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+    </kendo-chart>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div #dialogContainer></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Products</h4>
+    </div>
+    <div class="col-md-6 d-flex align-items-end flex-column">
+      <button type="button" class="btn btn-primary" (click)="create()">Create</button>
+    </div>
+  </div>
+  <br />
+
+  <kendo-grid [kendoGridBinding]="products"
+              kendoGridSelectBy="id"
+              [pageSize]="20"
+              [pageable]="true"
+              [sortable]="true"
+              [reorderable]="true"
+              [resizable]="true"
+              [height]="500"
+              [columnMenu]="{ filter: true }">
+
+    <kendo-grid-column field="name"
+                       title="Product Name"
+                       [width]="100"
+                       [resizable]="false">
+    </kendo-grid-column>
+
+    <kendo-grid-column field="description"
+                       title="Description"
+                       [width]="100"
+                       [resizable]="false"
+                       filter="boolean">
+    </kendo-grid-column>
+
+    <kendo-grid-column title="Actions" [width]="100" [resizable]="false">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <button class="k-button k-primary" (click)="edit(dataItem)">Edit</button>&nbsp;
+        <button class="k-button k-danger" (click)="delete(dataItem)">Delete</button>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>
+
+

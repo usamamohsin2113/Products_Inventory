@@ -1,44 +1,36 @@
-<kendo-grid
-      [kendoGridBinding]="customers"
-      kendoGridSelectBy="id"
-      [pageSize]="20"
-      [pageable]="true"
-      [sortable]="true"
-      [groupable]="true"
-      [reorderable]="true"
-      [resizable]="true"
-      [height]="500"
-      [columnMenu]="{ filter: true }">
+<kendo-grid [kendoGridBinding]="customers"
+            kendoGridSelectBy="id"
+            [pageSize]="20"
+            [pageable]="true"
+            [sortable]="true"
+            [groupable]="true"
+            [reorderable]="true"
+            [resizable]="true"
+            [height]="500"
+            [columnMenu]="{ filter: true }">
+  <kendo-grid-checkbox-column [width]="10"
+                              [headerClass]="{ 'text-center': true }"
+                              [class]="{ 'text-center': true }"
+                              [resizable]="false"
+                              [columnMenu]="false"
+                              [showSelectAll]="true">
+  </kendo-grid-checkbox-column>
 
-      <kendo-grid-checkbox-column
-        [width]="10"
-        [headerClass]="{ 'text-center': true }"
-        [class]="{ 'text-center': true }"
-        [resizable]="false"
-        [columnMenu]="false"
-        [showSelectAll]="true">
-      </kendo-grid-checkbox-column>
+  <kendo-grid-column-group title="Customers" [columnMenu]="false">
+    <kendo-grid-column field="customerId" title="CustomerId" [width]="220">
+    </kendo-grid-column>
 
-      <kendo-grid-column-group title="Customers" [columnMenu]="false">
+    <kendo-grid-column field="name"
+                       title="Customer Name"
+                       [width]="100"
+                       [resizable]="false">
+    </kendo-grid-column>
 
-        <kendo-grid-column field="CustomerId" title="CustomerId" [width]="220">
-        </kendo-grid-column>
-
-        <kendo-grid-column
-          field="name"
-          title="Customer Name"
-          [width]="100"
-          [resizable]="false">
-        </kendo-grid-column>
-
-        <kendo-grid-column
-          field="description"
-          title="Description"
-          [width]="100"
-          [resizable]="false"
-          filter="boolean">
-        </kendo-grid-column>
-
-      </kendo-grid-column-group>
-  
+    <kendo-grid-column field="description"
+                       title="Description"
+                       [width]="100"
+                       [resizable]="false"
+                       filter="boolean">
+    </kendo-grid-column>
+  </kendo-grid-column-group>
 </kendo-grid>

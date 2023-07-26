@@ -12,7 +12,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class PreventAuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(
@@ -23,20 +23,12 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.authService.isAuthenticated()) return true;
-    this.router.navigate(['login']);
-    return false;
-  }
-  canActivateChild(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    if (this.authService.isAuthenticated()) return true;
-    this.router.navigate(['login']);
+    if (
+      !this.authService.isAuthenticated() ||
+      state.url.includes('setupPassword')
+    )
+      return true;
+    this.router.navigate(['/products']);
     return false;
   }
 }

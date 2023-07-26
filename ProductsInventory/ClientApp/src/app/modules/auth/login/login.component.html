@@ -1,0 +1,56 @@
+<div class="main">
+  <div class="card card_d">
+    <div class="card-body" style="display: flex; justify-content: center">
+      <form class="k-form k-form-md" [formGroup]="loginForm">
+        <fieldset class="k-form-fieldset">
+          <div class="avtar_d">
+            <kendo-avatar
+              initials="LI"
+              width="80px"
+              height="80px"
+              shape="circle"
+            ></kendo-avatar>
+          </div>
+          <kendo-formfield>
+            <kendo-label [for]="userName" text="UserName"></kendo-label>
+            <kendo-textbox
+              formControlName="userName"
+              [clearButton]="true"
+              #userName
+              required
+            ></kendo-textbox>
+
+            <kendo-formerror>Error: Username is required</kendo-formerror>
+          </kendo-formfield>
+          <kendo-formfield>
+            <kendo-label [for]="password" text="Password"> </kendo-label>
+            <kendo-textbox
+              formControlName="password"
+              #password
+              required
+              [clearButton]="true"
+            >
+              <ng-template kendoTextBoxSuffixTemplate>
+                <button
+                  kendoButton
+                  look="clear"
+                  icon="eye"
+                  (click)="toggleVisibility()"
+                ></button>
+              </ng-template>
+            </kendo-textbox>
+
+            <kendo-formerror>Error: Password is required</kendo-formerror>
+          </kendo-formfield>
+
+          <div class="k-form-buttons">
+            <button kendoButton themeColor="primary" (click)="login()">
+              Login
+            </button>
+            <button kendoButton (click)="clearForm()">Clear</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

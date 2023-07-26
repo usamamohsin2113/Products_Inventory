@@ -4,11 +4,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BaseComponent } from './layout/base/base.component';
+import { AuthGuard } from './guards/auth.guard';
+import { PreventAuthGuard } from './guards/prevent-auth.guard';
+
 
 const routes: Routes = [
   {
+    path: 'login',
+    canActivate: [PreventAuthGuard],
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then(
+        (m) => m.AuthModule
+      ),
+  },
+  {
     path: '',
     component: BaseComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'products',
@@ -63,7 +75,8 @@ const routes: Routes = [
           import('./modules/customers/customers.module').then(
             (m) => m.CustomersModule
           ),
-      }
+      },
+
     ],
   },
 
@@ -76,4 +89,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

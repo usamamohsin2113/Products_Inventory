@@ -24,6 +24,7 @@ import { ProductsModule } from './modules/products/products.module';
 import { InvoicesModule } from './modules/invoices/invoices.module';
 import { CustomersModule } from './modules/customers/customers.module';
 import { SuppliersModule } from './modules/suppliers/suppliers.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,8 @@ import { SuppliersModule } from './modules/suppliers/suppliers.module';
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule,  
-    LayoutModule,
+    FormsModule,
+    //LayoutModule,
     DialogModule,
     AppRoutingModule,
     GridModule,
@@ -48,9 +49,10 @@ import { SuppliersModule } from './modules/suppliers/suppliers.module';
     SuppliersModule,
     SaleModule,
     DateInputsModule,
-    ChartsModule
+    ChartsModule,
+    AuthModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

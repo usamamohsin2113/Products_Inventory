@@ -29,7 +29,7 @@ namespace ProductsInventory.API.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login(UserLoginDTO dto)
         {
-            var user = await _userManager.FindByNameAsync(dto.Email);
+            var user = await _userManager.FindByNameAsync(dto.UserName);
 
             if (user == null)
             {

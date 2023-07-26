@@ -5,9 +5,11 @@ import { NavMenuComponent } from '../../layout/nav-menu/nav-menu.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    NavMenuComponent
+  ],
   imports: [
-   NavMenuComponent,
+    CommonModule
   ]
 })
 export class SharedModule { }
